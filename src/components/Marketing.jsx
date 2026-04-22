@@ -60,25 +60,15 @@ export default function Marketing() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Transform scroll progress to blur value
-  // Stays blurred (8px) until after about section, then deblurs
-  const blurValue = useTransform(scrollYProgress, [0, 0.4, 0.6], [8, 8, 0]);
-
-  // Transform scroll progress to opacity for the name (1 to 0)
-  const nameOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
-
-  // Transform scroll progress to scale for the name
-  const nameScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.8]);
-
-  // Transform scroll progress for about section
-  const aboutOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.35, 0.45], [0, 1, 1, 0]);
-  const aboutY = useTransform(scrollYProgress, [0.15, 0.25], ['20vh', '0vh']);
-
-  // Transform scroll progress to move DomeGallery up and out of view
+  const blurValue = useTransform(scrollYProgress, [0, 0.27, 0.45], [8, 8, 0]);
+  const nameOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
+  const nameScale = useTransform(scrollYProgress, [0, 0.09], [1, 0.8]);
+  // once faded (0.09→0.1) jump name + dark overlay off-screen so they don't ghost over dome/masonry
+  const nameY = useTransform(scrollYProgress, [0, 0.09, 0.1], ['0vh', '0vh', '-300vh']);
+  const aboutOpacity = useTransform(scrollYProgress, [0.09, 0.15, 0.21, 0.27], [0, 1, 1, 0]);
+  const aboutY = useTransform(scrollYProgress, [0.09, 0.15], ['20vh', '0vh']);
   const domeY = useTransform(scrollYProgress, [0.6, 1], ['0vh', '-100vh']);
-
-  // Opacity for drag prompt (visible when dome is clear, fades when scrolling out)
-  const dragPromptOpacity = useTransform(scrollYProgress, [0.5, 0.6, 0.65], [0, 1, 0]);
+  const dragPromptOpacity = useTransform(scrollYProgress, [0.38, 0.45, 0.58, 0.62], [0, 1, 1, 0]);
 
   // Marketing projects for Masonry
   const postersList = [
@@ -138,11 +128,11 @@ export default function Marketing() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        <img src={logo} alt="Logo" className="w-auto h-6 lg:h-20" />
+        <img src={logo} alt="Logo" className="w-auto h-10 lg:h-20" />
       </motion.a>
 
       {/* DomeGallery + Name Section - sticky background */}
-      <div ref={containerRef} className="relative w-full" style={{ height: '300vh' }}>
+      <div ref={containerRef} className="relative w-full" style={{ height: '500vh' }}>
         {/* Fixed DomeGallery with dynamic blur - scrolls out of view */}
         <motion.div
           className="fixed inset-0 w-full h-screen z-[1]"
@@ -184,7 +174,7 @@ export default function Marketing() {
           className="fixed inset-0 w-full h-screen bg-black/50 pointer-events-none z-10"
           style={{
             opacity: nameOpacity,
-            y: domeY
+            y: nameY,
           }}
         />
 
@@ -194,7 +184,7 @@ export default function Marketing() {
           style={{
             opacity: nameOpacity,
             scale: nameScale,
-            y: domeY
+            y: nameY,
           }}
         >
           {/* Warm gradient glow on left side */}
@@ -207,13 +197,9 @@ export default function Marketing() {
           />
 
           <div className="relative w-full max-w-7xl px-8">
-            {/* Main text container */}
             <div className="relative z-10 flex flex-col items-center">
-              <h1 className="text-[18vw] lg:text-[14vw] font-black tracking-tighter flex justify-center items-center">
-                {/* GWE - solid greyer white */}
+              <h1 className="text-[12vw] lg:text-[14vw] font-black tracking-tighter flex justify-center items-center">
                 <span className="text-gray-200">GWE</span>
-
-                {/* NDO - outlined to show holographic object */}
                 <span
                   className="relative"
                   style={{
@@ -224,12 +210,9 @@ export default function Marketing() {
                 >
                   NDO
                 </span>
-
-                {/* LYN - solid greyer white */}
                 <span className="text-gray-200">LYN</span>
               </h1>
 
-              {/* Marketing Portfolio badge - below the name */}
               <motion.div
                 className="mt-6 lg:mt-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -245,31 +228,14 @@ export default function Marketing() {
             </div>
           </div>
 
-          {/* Scroll indicator */}
           <motion.div
             className="absolute bottom-12 flex flex-col items-center gap-2 w-full"
-            animate={{
-              y: [0, 10, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             <span className="text-sm text-gray-400 font-light tracking-wider">Scroll to explore</span>
-            <svg
-              className="w-5 h-5 text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={1.5}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
+            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </motion.div>
         </motion.div>
@@ -290,7 +256,7 @@ export default function Marketing() {
             y: aboutY
           }}
         >
-          <div className="w-full flex flex-col lg:flex-row items-center gap-4 lg:gap-0">
+          <div className="w-full flex flex-col lg:flex-row items-center gap-2 lg:gap-0">
             {/* Left side - Gwen Image */}
             <motion.div
               className="w-full lg:w-1/2 flex-shrink-0 flex justify-center lg:justify-start"
@@ -301,7 +267,7 @@ export default function Marketing() {
                 alt="Gwen"
                 className="w-auto h-auto object-contain rounded-3xl"
                 style={{
-                  height: 'clamp(60vh, 120vh, 120vh)',
+                  height: 'clamp(20vh, 40vh, 80vh)',
                   width: 'auto',
                   maxWidth: '100%',
                   filter: 'drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5))'
@@ -310,10 +276,10 @@ export default function Marketing() {
             </motion.div>
 
             {/* Right side - Text content */}
-            <div className="w-full lg:w-1/2 px-4 lg:px-1 flex flex-col justify-center space-y-4 lg:space-y-8">
+            <div className="w-full lg:w-1/2 px-4 lg:px-1 flex flex-col justify-center space-y-2 lg:space-y-8">
               {/* Title with quotes */}
               <motion.h3
-                className="text-4xl md:text-6xl lg:text-8xl font-black tracking-tight uppercase mb-4 lg:mb-8"
+                className="text-3xl md:text-6xl lg:text-8xl font-black tracking-tight uppercase mb-2 lg:mb-8"
                 style={{
                   opacity: aboutOpacity,
                   letterSpacing: '0.05em',
@@ -336,7 +302,7 @@ export default function Marketing() {
 
               {/* Roles */}
               <motion.div
-                className="space-y-1 lg:space-y-2 mb-6 lg:mb-10"
+                className="space-y-0.5 lg:space-y-2 mb-2 lg:mb-10"
                 style={{ opacity: aboutOpacity }}
               >
                 <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
@@ -379,14 +345,39 @@ export default function Marketing() {
         </motion.div>
 
         {/* Spacer to enable scrolling */}
-        <div className="h-[300vh]" />
+        <div className="h-[500vh]" />
       </div>
 
       {/* Masonry Section - appears after DomeGallery scrolls away */}
       <div ref={masonryRef} className="relative w-full bg-neutral-950">
+        {/* Mobile Posters header */}
+        <div className="block lg:hidden pt-10 pb-4 px-4">
+          <h2
+            className="font-black tracking-tight select-none"
+            style={{
+              fontSize: 'clamp(4rem, 22vw, 8rem)',
+              background: 'linear-gradient(135deg, #ffd4c4 0%, #ffb8a8 25%, #ff9d8f 50%, #ffb8a8 75%, #ffd4c4 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              filter: 'drop-shadow(0 10px 30px rgba(255, 157, 143, 0.4)) drop-shadow(0 0 80px rgba(255, 184, 168, 0.3))',
+              textShadow: '0 5px 15px rgba(255, 157, 143, 0.5)',
+              letterSpacing: '-0.02em',
+              transform: 'translateZ(0)',
+            }}
+          >
+            <span style={{
+              position: 'relative',
+              display: 'inline-block',
+              filter: 'drop-shadow(2px 2px 4px rgba(255, 255, 255, 0.5)) drop-shadow(-2px -2px 4px rgba(0, 0, 0, 0.3))'
+            }}>
+              Posters
+            </span>
+          </h2>
+        </div>
         <div className="flex flex-row">
           {/* Left side - Masonry images */}
-          <div className="w-full lg:w-1/2 py-10 lg:py-20 px-4 lg:pl-12">
+          <div className="w-full lg:w-1/2 py-4 lg:py-20 px-4 lg:pl-12">
             <Masonry
               items={marketingProjects}
               ease="power3.out"
@@ -504,6 +495,14 @@ export default function Marketing() {
               className="text-white text-xl lg:text-2xl font-bold uppercase tracking-wide hover:text-blue-400 transition-colors duration-300 text-center lg:text-right"
             >
               // LinkedIn
+            </a>
+            <a
+              href="https://gwndolyn.live"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-xl lg:text-2xl font-bold uppercase tracking-wide hover:text-purple-400 transition-colors duration-300 text-center lg:text-right"
+            >
+              // Portfolio
             </a>
           </motion.div>
         </div>

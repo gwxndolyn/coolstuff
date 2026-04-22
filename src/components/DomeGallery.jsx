@@ -270,6 +270,19 @@ export default function DomeGallery({
     applyTransform(rotationRef.current.x, rotationRef.current.y);
   }, []);
 
+  useEffect(() => {
+    let raf;
+    const spin = () => {
+      raf = requestAnimationFrame(spin);
+      if (draggingRef.current || focusedElRef.current || inertiaRAF.current) return;
+      const nextY = wrapAngleSigned(rotationRef.current.y + 0.08);
+      rotationRef.current = { ...rotationRef.current, y: nextY };
+      applyTransform(rotationRef.current.x, nextY);
+    };
+    raf = requestAnimationFrame(spin);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   const stopInertia = useCallback(() => {
     if (inertiaRAF.current) {
       cancelAnimationFrame(inertiaRAF.current);

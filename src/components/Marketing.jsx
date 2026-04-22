@@ -8,14 +8,20 @@ import gwenImg from '../assets/gwen.png';
 import connect from '../assets/marketing/connect.png';
 
 // Marketing posters
-import web3 from '../assets/marketing/posters/web3.png';
-import fintech from '../assets/marketing/posters/fintech.png';
 import design from '../assets/marketing/posters/design.jpeg';
 import heymax1 from '../assets/marketing/posters/heymax1.png';
 import heymax2 from '../assets/marketing/posters/heymax2.png';
 import heymax3 from '../assets/marketing/posters/heymax3.png';
 import heymax4 from '../assets/marketing/posters/heymax4.png';
 import pme from '../assets/marketing/posters/pme.webp';
+import studyBraek from '../assets/marketing/posters/study-braek.png';
+import microsoft from '../assets/marketing/posters/microsoft.png';
+import toskaFriendzzzz from '../assets/marketing/posters/toska-friendzzzz.png';
+import stereoExco from '../assets/marketing/posters/stereo-exco.png';
+import pmCoffeeChat from '../assets/marketing/posters/pm-coffee-chat.png';
+import djLineup from '../assets/marketing/posters/dj-lineup.png';
+import marketingTeam from '../assets/marketing/posters/marketing-team.png';
+import excoGroup from '../assets/marketing/posters/exco-group.png';
 
 export default function Marketing() {
   const containerRef = useRef(null);
@@ -73,12 +79,17 @@ export default function Marketing() {
   // Marketing projects for Masonry
   const postersList = [
 
-    { id: "pme", img: pme, url: pme },
-    { id: "heymax2", img: heymax2, url: heymax2 },
-    { id: "web3", img: web3, url: web3 },
-    { id: "fintech", img: fintech, url: fintech },
-    { id: "design", img: design, url: design },
+    { id: "stereo-exco", img: stereoExco, url: stereoExco },
+    { id: "toska-friendzzzz", img: toskaFriendzzzz, url: toskaFriendzzzz },
+    { id: "marketing-team", img: marketingTeam, url: marketingTeam },
+    { id: "pm-coffee-chat", img: pmCoffeeChat, url: pmCoffeeChat },
     { id: "heymax1", img: heymax1, url: heymax1 },
+    { id: "study-braek", img: studyBraek, url: studyBraek },
+    { id: "dj-lineup", img: djLineup, url: djLineup },
+    { id: "microsoft", img: microsoft, url: microsoft },
+    { id: "pme", img: pme, url: pme },
+    { id: "exco-group", img: excoGroup, url: excoGroup },
+    { id: "design", img: design, url: design },
     { id: "heymax3", img: heymax3, url: heymax3 },
     { id: "heymax4", img: heymax4, url: heymax4 },
 
@@ -306,16 +317,10 @@ export default function Marketing() {
                 style={{ opacity: aboutOpacity }}
               >
                 <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
-                  WEBTECH DIRECTOR FOR PD26
+                  PRODUCT CLUB - MARKETING DIRECTOR
                 </p>
                 <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
-                  MARKETING DIRECTOR FOR PRODUCT CLUB
-                </p>
-                <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
-                  MARKETING EXECUTIVE FOR STEREOMETA
-                </p>
-                <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
-                  TECHLEAD OF MARCOMMS @ YOUTHTECHSG
+                  STEREOMETA - MARKETING EXECUTIVE
                 </p>
               </motion.div>
 
@@ -335,7 +340,7 @@ export default function Marketing() {
                     PHOTOGRAPHY
                   </li>
                   <li className="text-sm md:text-base lg:text-xl text-white uppercase tracking-wide list-disc">
-                    EDITING
+                    DJing
                   </li>
                 </ul>
               </motion.div>

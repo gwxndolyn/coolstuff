@@ -29,6 +29,7 @@ export default function Marketing() {
   const [postersFixed, setPostersFixed] = useState(false);
   const [postersAtBottom, setPostersAtBottom] = useState(false);
   const [loadedProjects, setLoadedProjects] = useState([]);
+  const [isMobile, setIsMobile] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -66,7 +67,16 @@ export default function Marketing() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const blurValue = useTransform(scrollYProgress, [0, 0.27, 0.45], [8, 8, 0]);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 1023px)');
+    const handle = () => setIsMobile(mq.matches);
+    handle();
+    mq.addEventListener('change', handle);
+    return () => mq.removeEventListener('change', handle);
+  }, []);
+
+  const baseBlur = isMobile ? 3 : 5;
+  const blurValue = useTransform(scrollYProgress, [0, 0.27, 0.45], [baseBlur, baseBlur, 0]);
   const nameOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
   const nameScale = useTransform(scrollYProgress, [0, 0.09], [1, 0.8]);
   // once faded (0.09→0.1) jump name + dark overlay off-screen so they don't ghost over dome/masonry
@@ -146,7 +156,7 @@ export default function Marketing() {
       <div ref={containerRef} className="relative w-full" style={{ height: '500vh' }}>
         {/* Fixed DomeGallery with dynamic blur - scrolls out of view */}
         <motion.div
-          className="fixed inset-0 w-full h-screen z-[1]"
+          className="fixed inset-0 w-full h-[100dvh] lg:h-screen z-[1]"
           style={{
             filter: useTransform(blurValue, (v) => `blur(${v}px)`),
             y: domeY
@@ -182,7 +192,7 @@ export default function Marketing() {
 
         {/* Dark overlay - fades away with scroll */}
         <motion.div
-          className="fixed inset-0 w-full h-screen bg-black/50 pointer-events-none z-10"
+          className="fixed inset-0 w-full h-screen bg-black/60 pointer-events-none z-10"
           style={{
             opacity: nameOpacity,
             y: nameY,
@@ -209,7 +219,7 @@ export default function Marketing() {
 
           <div className="relative w-full max-w-7xl px-8">
             <div className="relative z-10 flex flex-col items-center">
-              <h1 className="text-[12vw] lg:text-[14vw] font-black tracking-tighter flex justify-center items-center">
+              <h1 className="text-[14vw] lg:text-[14vw] font-black tracking-tighter flex justify-center items-center">
                 <span className="text-gray-200">GWE</span>
                 <span
                   className="relative"
@@ -253,7 +263,7 @@ export default function Marketing() {
 
         {/* Darker overlay for About section */}
         <motion.div
-          className="fixed inset-0 w-full h-screen bg-black/50 pointer-events-none z-55"
+          className="fixed inset-0 w-full h-screen bg-black/60 pointer-events-none z-55"
           style={{
             opacity: aboutOpacity,
           }}
@@ -290,7 +300,7 @@ export default function Marketing() {
             <div className="w-full lg:w-1/2 px-4 lg:px-1 flex flex-col justify-center space-y-2 lg:space-y-8">
               {/* Title with quotes */}
               <motion.h3
-                className="text-3xl md:text-6xl lg:text-8xl font-black tracking-tight uppercase mb-2 lg:mb-8"
+                className="text-5xl md:text-6xl lg:text-8xl font-black tracking-tight uppercase mb-2 lg:mb-8"
                 style={{
                   opacity: aboutOpacity,
                   letterSpacing: '0.05em',
@@ -361,9 +371,9 @@ export default function Marketing() {
         {/* Mobile Posters header */}
         <div className="block lg:hidden pt-10 pb-4 px-4">
           <h2
-            className="font-black tracking-tight select-none"
+            className="font-black tracking-tight select-none text-center w-full"
             style={{
-              fontSize: 'clamp(4rem, 22vw, 8rem)',
+              fontSize: 'clamp(3.25rem, 18vw, 7rem)',
               background: 'linear-gradient(135deg, #ffd4c4 0%, #ffb8a8 25%, #ff9d8f 50%, #ffb8a8 75%, #ffd4c4 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -379,7 +389,7 @@ export default function Marketing() {
               display: 'inline-block',
               filter: 'drop-shadow(2px 2px 4px rgba(255, 255, 255, 0.5)) drop-shadow(-2px -2px 4px rgba(0, 0, 0, 0.3))'
             }}>
-              Posters
+              POSTERS
             </span>
           </h2>
         </div>
@@ -422,7 +432,7 @@ export default function Marketing() {
               <h2
                 className="font-black tracking-tight select-none"
                 style={{
-                  fontSize: 'clamp(4rem, 15vw, 12rem)',
+                  fontSize: 'clamp(3.5rem, 13vw, 10rem)',
                   writingMode: 'vertical-rl',
                   textOrientation: 'mixed',
                   background: 'linear-gradient(135deg, #ffd4c4 0%, #ffb8a8 25%, #ff9d8f 50%, #ffb8a8 75%, #ffd4c4 100%)',
@@ -440,7 +450,7 @@ export default function Marketing() {
                   display: 'inline-block',
                   filter: 'drop-shadow(2px 2px 4px rgba(255, 255, 255, 0.5)) drop-shadow(-2px -2px 4px rgba(0, 0, 0, 0.3))'
                 }}>
-                  Posters
+                  POSTERS
                 </span>
               </h2>
             </div>

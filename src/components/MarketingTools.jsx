@@ -8,7 +8,7 @@ const toolNames = [
 
 export default function MarketingTools() {
   return (
-    <div className="relative w-full h-screen bg-black overflow-hidden">
+    <div className="relative w-full h-[70vh] sm:h-[80vh] lg:h-screen bg-black overflow-hidden">
       {/* Gradient orbs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-yellow-200/30 rounded-full blur-[100px]" />
@@ -24,7 +24,7 @@ export default function MarketingTools() {
         initial={{ opacity: 0, x: 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-        className="absolute top-6 right-4 lg:top-10 lg:right-10 text-xl sm:text-3xl lg:text-5xl font-black text-white tracking-tighter text-right z-10"
+        className="absolute top-6 right-4 lg:top-10 lg:right-10 text-2xl sm:text-3xl lg:text-5xl font-black text-white tracking-tighter text-right z-10"
       >
         EDITING TECHNOLOGIES
       </motion.h2>

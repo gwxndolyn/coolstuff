@@ -58,6 +58,7 @@ const Masonry = ({
   colorShiftOnHover = false
 }) => {
   const columns = 2;
+  const blurStartPx = useMedia(['(max-width: 640px)'], [4], 6);
 
   const [containerRef, { width }] = useMeasure();
   const [imagesReady, setImagesReady] = useState(false);
@@ -135,7 +136,7 @@ const Masonry = ({
             y: start.y,
             width: item.w,
             height: item.h,
-            ...(blurToFocus && { filter: 'blur(10px)' })
+            ...(blurToFocus && { filter: `blur(${blurStartPx}px)` })
           },
           {
             opacity: 1,

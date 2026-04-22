@@ -322,6 +322,9 @@ export default function Marketing() {
                 <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
                   STEREOMETA - MARKETING EXECUTIVE
                 </p>
+                <p className="text-sm md:text-base lg:text-xl font-bold text-white uppercase tracking-wide">
+                  FINTECH - MARKETING DIRECTOR
+                </p>
               </motion.div>
 
               {/* Passion section */}

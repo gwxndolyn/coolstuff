@@ -75,6 +75,23 @@ export default function Marketing() {
     return () => mq.removeEventListener('change', handle);
   }, []);
 
+  useEffect(() => {
+    if (!document.getElementById('instagram-embed-script')) {
+      const script = document.createElement('script');
+      script.id = 'instagram-embed-script';
+      script.async = true;
+      script.src = 'https://www.instagram.com/embed.js';
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (window.instgrm) window.instgrm.Embeds.process();
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [loadedProjects]);
+
   const baseBlur = isMobile ? 3 : 5;
   const blurValue = useTransform(scrollYProgress, [0, 0.27, 0.45], [baseBlur, baseBlur, 0]);
   const nameOpacity = useTransform(scrollYProgress, [0, 0.09], [1, 0]);
@@ -454,6 +471,102 @@ export default function Marketing() {
                 </span>
               </h2>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Posts Section */}
+      <div className="relative w-full bg-neutral-950 pt-8 pb-16 lg:pt-12 lg:pb-24 overflow-hidden">
+        {/* Background glow orbs */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div
+            className="absolute top-1/4 left-1/3 w-[600px] h-[600px] rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(167, 139, 250, 0.08) 0%, transparent 70%)', filter: 'blur(80px)' }}
+          />
+          <div
+            className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] rounded-full"
+            style={{ background: 'radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 70%)', filter: 'blur(100px)' }}
+          />
+        </div>
+
+        <div className="relative z-10 w-full max-w-6xl mx-auto px-4 lg:px-8">
+          {/* Section header */}
+          <motion.div
+            className="flex flex-col items-start mb-10 lg:mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2
+              className="font-black tracking-tight select-none"
+              style={{
+                fontSize: 'clamp(3.25rem, 14vw, 8rem)',
+                background: 'linear-gradient(135deg, #e9d5ff 0%, #c4b5fd 25%, #a78bfa 50%, #c4b5fd 75%, #e9d5ff 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 10px 30px rgba(167, 139, 250, 0.4)) drop-shadow(0 0 80px rgba(196, 181, 253, 0.3))',
+                textShadow: '0 5px 15px rgba(167, 139, 250, 0.5)',
+                letterSpacing: '-0.02em',
+                transform: 'translateZ(0)',
+              }}
+            >
+              <span style={{
+                position: 'relative',
+                display: 'inline-block',
+                filter: 'drop-shadow(2px 2px 4px rgba(255, 255, 255, 0.5)) drop-shadow(-2px -2px 4px rgba(0, 0, 0, 0.3))'
+              }}>
+                ''POSTS
+              </span>
+            </h2>
+            <p className="text-gray-500 text-xs lg:text-sm font-light tracking-[0.35em] uppercase mt-2">
+              @smu.stereometa
+            </p>
+          </motion.div>
+
+          {/* Instagram posts — 2 cols on mobile, 4 cols on desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
+            {[
+              { url: 'https://www.instagram.com/p/DVfcjLpD3y1/', delay: 0 },
+              { url: 'https://www.instagram.com/p/DWBDTEWj4ih/', delay: 0.1 },
+              { url: 'https://www.instagram.com/p/DWJMCbJjyZe/', delay: 0.2 },
+              { url: 'https://www.instagram.com/p/DVDF4hWj02m/', delay: 0.3 },
+            ].map(({ url, delay }) => (
+              <motion.div
+                key={url}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay }}
+                viewport={{ once: true }}
+                className="w-full"
+              >
+                <div
+                  className="rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-2 [zoom:0.53] lg:[zoom:0.79]"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(233, 213, 255, 0.2) 0%, rgba(167, 139, 250, 0.1) 50%, rgba(124, 58, 237, 0.15) 100%)',
+                    padding: '2px',
+                    boxShadow: '0 25px 70px rgba(0, 0, 0, 0.6), 0 0 50px rgba(167, 139, 250, 0.08)',
+                  }}
+                >
+                  <div className="rounded-[14px] overflow-hidden bg-white">
+                    <blockquote
+                      className="instagram-media"
+                      data-instgrm-permalink={`${url}?utm_source=ig_embed&utm_campaign=loading`}
+                      data-instgrm-version="14"
+                      style={{
+                        background: '#FFF',
+                        border: 0,
+                        borderRadius: 0,
+                        margin: 0,
+                        padding: 0,
+                        width: '100%',
+                      }}
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

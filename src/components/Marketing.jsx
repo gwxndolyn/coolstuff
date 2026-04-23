@@ -550,24 +550,155 @@ export default function Marketing() {
                   }}
                 >
                   <div className="rounded-[14px] overflow-hidden bg-white">
-                    <blockquote
-                      className="instagram-media"
-                      data-instgrm-permalink={`${url}?utm_source=ig_embed&utm_campaign=loading`}
-                      data-instgrm-version="14"
-                      style={{
-                        background: '#FFF',
-                        border: 0,
-                        borderRadius: 0,
-                        margin: 0,
-                        padding: 0,
-                        width: '100%',
-                      }}
-                    />
+                    <div style={{ marginTop: '-68px' }}>
+                      <blockquote
+                        className="instagram-media"
+                        data-instgrm-permalink={`${url}?utm_source=ig_embed&utm_campaign=loading`}
+                        data-instgrm-version="14"
+                        style={{
+                          background: '#FFF',
+                          border: 0,
+                          borderRadius: 0,
+                          margin: 0,
+                          padding: 0,
+                          width: '100%',
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* Highest Engagement */}
+          <motion.div
+            className="mt-10 lg:mt-14 pt-8 lg:pt-10 border-t border-white/8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            {/* Mobile label */}
+            <p className="lg:hidden text-2xl font-black text-white tracking-tighter leading-none mb-4">
+              HIGHEST<br />ENGAGEMENT
+            </p>
+
+            <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-stretch">
+
+              {/* Vertical label - desktop only */}
+              <div
+                className="hidden lg:block shrink-0 self-stretch overflow-hidden"
+                style={{
+                  writingMode: 'vertical-rl',
+                  transform: 'rotate(180deg)',
+                  fontSize: '2.6rem',
+                  fontWeight: 900,
+                  color: 'white',
+                  letterSpacing: '-0.02em',
+                  lineHeight: 1,
+                }}
+              >
+                HIGHEST<br />ENGAGEMENT
+              </div>
+
+              {/* Line graph */}
+              <div className="w-full lg:w-[55%] flex flex-col self-stretch">
+                <svg
+                  viewBox="0 0 400 100"
+                  preserveAspectRatio="none"
+                  className="w-full flex-1"
+                  style={{ minHeight: isMobile ? '72px' : undefined }}
+                >
+                  <defs>
+                    <linearGradient id="strokeGrad" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="rgba(109, 40, 217, 0.7)" />
+                      <stop offset="100%" stopColor="#c4b5fd" />
+                    </linearGradient>
+                    <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="rgba(167, 139, 250, 0.18)" />
+                      <stop offset="100%" stopColor="rgba(167, 139, 250, 0)" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* Subtle grid lines */}
+                  <line x1="0" y1="50" x2="400" y2="50" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+                  <line x1="0" y1="25" x2="400" y2="25" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+
+                  {/* Area fill under curve */}
+                  <path
+                    d="M 0 88 C 40 87, 80 85, 130 80 C 175 74, 210 66, 250 52 C 290 36, 340 16, 400 7 L 400 100 L 0 100 Z"
+                    fill="url(#areaGrad)"
+                  />
+
+                  {/* Animated line */}
+                  <motion.path
+                    d="M 0 88 C 40 87, 80 85, 130 80 C 175 74, 210 66, 250 52 C 290 36, 340 16, 400 7"
+                    fill="none"
+                    stroke="url(#strokeGrad)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    whileInView={{ pathLength: 1, opacity: 1 }}
+                    transition={{ duration: 1.4, ease: 'easeOut' }}
+                    viewport={{ once: true }}
+                  />
+
+                  {/* End dot */}
+                  <motion.circle
+                    cx="400" cy="7" r="3.5"
+                    fill="#c4b5fd"
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 1.3, duration: 0.3 }}
+                    viewport={{ once: true }}
+                  />
+
+                  {/* Start dot */}
+                  <circle cx="0" cy="88" r="2.5" fill="rgba(167,139,250,0.45)" />
+                </svg>
+
+                <div className="flex justify-between mt-1.5">
+                  <span className="text-gray-600 text-[9px] tracking-wide">Jan–Feb 2025</span>
+                  <span className="text-gray-400 text-[9px] tracking-wide">15,670 reached · end Mar</span>
+                </div>
+              </div>
+
+              {/* Key stats */}
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-x-6 gap-y-4 lg:gap-y-5 lg:w-36 w-full">
+                {[
+                  { value: '157,963', label: 'Total Views', pct: '+248.3%' },
+                  { value: '15,670', label: 'Accounts Reached', pct: '+1,165.8%' },
+                  { value: '~10K', label: 'Avg Views / Post', pct: '+195.2%' },
+                  { value: '2.7K', label: 'Interactions', pct: '+312.7%' },
+                ].map(({ value, label, pct }, i) => (
+                  <motion.div
+                    key={label}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    transition={{ duration: 0.5, delay: 0.3 + i * 0.08 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <p
+                        className="text-white font-black tabular-nums leading-none"
+                        style={{ fontSize: 'clamp(1.1rem, 3vw, 1.5rem)', letterSpacing: '-0.02em' }}
+                      >
+                        {value}
+                      </p>
+                      <span className="text-[8px] font-semibold tabular-nums px-1.5 py-0.5 rounded-full bg-green-400/15 text-green-400 leading-none">
+                        {pct}
+                      </span>
+                    </div>
+                    <p className="text-gray-600 text-[9px] tracking-wide uppercase">{label}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+            </div>
+          </motion.div>
+
         </div>
       </div>
 

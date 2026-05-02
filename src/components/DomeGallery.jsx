@@ -20,6 +20,15 @@ import img15 from '../assets/marketing/photos/IMG_6074.JPG';
 import img16 from '../assets/marketing/photos/IMG_6096.JPG';
 import img17 from '../assets/marketing/photos/IMG_9337.JPG';
 import img18 from '../assets/marketing/photos/IMG_9529.JPG';
+import img19 from '../assets/marketing/photos/150F3D6C-2F6D-45A5-B6FB-EC4B2221394A_1_105_c.jpeg';
+import img20 from '../assets/marketing/photos/28879950-0D00-4736-BB76-F062AEEC69BC_1_105_c.jpeg';
+import img21 from '../assets/marketing/photos/49145E54-A2B8-460A-8124-B5EB978B3CA7_1_105_c.jpeg';
+import img22 from '../assets/marketing/photos/70ED665D-A8B4-4528-A37A-FAA2F67899A7_1_105_c.jpeg';
+import img23 from '../assets/marketing/photos/C0E1AC35-0505-4203-B9B0-44754617AB2F_1_105_c.jpeg';
+import img24 from '../assets/marketing/photos/C3505EBD-A1AA-4814-ACE8-C7A6918F332D_1_105_c.jpeg';
+import img26 from '../assets/marketing/photos/D6C3B2CB-3A63-48E7-B929-E02580DC05F4_1_105_c.jpeg';
+import img27 from '../assets/marketing/photos/ECA88387-5C77-4977-88FD-80CAF1DABFF0_1_105_c.jpeg';
+import img28 from '../assets/marketing/photos/F4EF5B09-6350-4529-B362-C555604D3307_1_105_c.jpeg';
 
 const DEFAULT_IMAGES = [
   { src: img1, alt: 'Marketing photo 1' },
@@ -40,6 +49,15 @@ const DEFAULT_IMAGES = [
   { src: img16, alt: 'Marketing photo 16' },
   { src: img17, alt: 'Marketing photo 17' },
   { src: img18, alt: 'Marketing photo 18' },
+  { src: img19, alt: 'Marketing photo 19' },
+  { src: img20, alt: 'Marketing photo 20' },
+  { src: img21, alt: 'Marketing photo 21' },
+  { src: img22, alt: 'Marketing photo 22' },
+  { src: img23, alt: 'Marketing photo 23' },
+  { src: img24, alt: 'Marketing photo 24' },
+  { src: img26, alt: 'Marketing photo 26' },
+  { src: img27, alt: 'Marketing photo 27' },
+  { src: img28, alt: 'Marketing photo 28' },
 ];
 
 const DEFAULTS = {
